@@ -1,7 +1,6 @@
 // TODO: Get Client ID from https://developer.spotify.com/dashboard/ and put it here
-const clientId = "YOUR SPOTIFY CLIENT ID";
-
-const redirectUri = "http://localhost:5173/";
+const clientId = "bb24022b2e67444ebde6706f467fea4d";
+const redirectUri = "jammingnaja.surge.sh";
 const spotifyUrl = `https://accounts.spotify.com/authorize?response_type=token&scope=playlist-modify-public&client_id=${clientId}&redirect_uri=${redirectUri}`;
 let accessToken = undefined;
 let expiresIn = undefined;
@@ -24,6 +23,7 @@ const Spotify = {
   },
 
   async search(term) {
+    
     const replaceEmptySpace = term.replace(" ", "%20");
     const searchUrl = `https://api.spotify.com/v1/search?type=track&q=${replaceEmptySpace}`;
     return fetch(searchUrl, {
@@ -71,7 +71,7 @@ const Spotify = {
             Authorization: `Bearer ${accessToken}`,
           },
           body: JSON.stringify({
-            uris: trackIds.map((id) => "spotify:track:".concat(id)),
+            uris: trackIds
           }),
         });
       }
